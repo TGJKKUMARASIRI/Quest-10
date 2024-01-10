@@ -3,12 +3,13 @@
 using namespace std;
 
 
-int main()
-{
-	Board myBoard;
-	myBoard.display_menu();
-	cout<<myBoard.rows;
-	return 0;
+int main() {
+    Board gameBoard;
+    gameBoard.display_menu();
+    gameBoard.display_field();
+
+    return 0;
 }
+
 
 
