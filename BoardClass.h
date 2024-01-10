@@ -3,6 +3,8 @@
 #include <ctime>
 using namespace std;
 
+#define MAXSIDE 25
+
  /*
  P.SIVABALASRI - 21_ENG_097
  
@@ -69,61 +71,8 @@ public:
             }
         }
     }
-
-    // Function to display the 3D field
-    /*
-	void display_field() {
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < rows; ++j) {
-                // Display the front layer (whether there is a bomb or not)
-                cout << (field[i][j][0] == 1 ? "B" : "-") << " ";
-            }
-            cout << endl;
-        }
-
-        cout << endl;
-        
-		
-		 // displaying the background stroed data
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < rows; ++j) {
-                // Display the back layer (1 if there is a bomb, 0 otherwise)
-                cout << (field[i][j][0] == 1 ? 1 : 0) << " ";
-            }
-            cout << endl;
-        }
-        */
-        
-        //P.SIVABALASRI
-        void display_field() {
-        	
-        	field[2][3][1] = 1;
-        	field[2][8][1] = 2;
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < rows; ++j) {
-                // Display the front layer (whether there is a bomb or not)
-                if (field[i][j][1] == 0)
-                {
-                	cout << "C ";
-				}
-				else if (field[i][j][1] == 1)
-				{
-					cout<<"1 ";
-				}
-				else
-				{
-					cout << "F ";
-				}
-            }
-            cout << endl;
-        }
-
-        cout << endl;
-    }
-   
-   #define MAXSIDE 25
-// Function to count the number of mines in the adjacent cells
-int countAdjacentMines(int row, int col, int mines[][2], char realBoard[][MAXSIDE]) {
+	// Function to count the number of mines in the adjacent cells
+	int countAdjacentMines(int row, int col, int mines[][2], char realBoard[][MAXSIDE]) {
     int count = 0;
 
     // Neighbour coordinates offsets
@@ -152,8 +101,6 @@ int countAdjacentMines(int row, int col, int mines[][2], char realBoard[][MAXSID
     return count;
 }
 
-const int SIDE = 10; // Define your side length
-
 bool isValid(int row, int col) {
     // Returns true if row number and column number is in range
     return (row >= 0) && (row < SIDE) &&
@@ -162,45 +109,55 @@ bool isValid(int row, int col) {
 
 // A Utility Function to check whether given cell (row, col) has a mine or not.
 bool isMine(int row, int col, char board[][MAXSIDE]) {
-    if (board[row][col] == '*')
-        return true;
-    else
-        return false;
+	return (board [row][col]=='*')
+//    if (board[row][col] == '*')
+//        return ;
+//    else
+//        return false;
 }
+    
+        
+        //P.SIVABALASRI
+        void display_field() {
+        	
+        	field[2][3][1] = 1;
+        	field[2][8][1] = 2;
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < rows; ++j) {
+                // Display the front layer (whether there is a bomb or not)
+                if (field[i][j][1] == 0)
+                {
+                	cout << "C ";
+				}
+				else if (field[i][j][1] == 2)
+				{
+					cout<<"F ";
+				}
+				else
+				{
+					// If it's not a bomb, use countAdjacentMines to get the number of adjacent bombs
+                    int adjacentMines = countAdjacentMines(i, j, nullptr, getRealBoard());
+                    cout << adjacentMines << " ";
+				}
+            }
+            cout << endl;
+        }
 
+        cout << endl;
+    }
+   
 
+// Function to get the real board (mine locations)
+    char (*getRealBoard())[MAXSIDE] {
+        static char realBoard[MAXSIDE][MAXSIDE];
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < rows; ++j) {
+                realBoard[i][j] = (field[i][j][0] == 1) ? '*' : '-';
+            }
+        }
+        return realBoard;
+    }
 
-
-
- 
-
-
-
-
-
-
-
- labs
-]
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 };
 
 
