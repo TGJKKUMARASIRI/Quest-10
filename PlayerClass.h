@@ -38,29 +38,31 @@ public:
     }
 
     //Kumarasiri
-    void CheckIfItBombed()
+    bool CheckIfItBombed()
     {
         if (board.field[int(command[0])-65][int(command[1])-65][0] == 1)
         {
             cout << "You step on a bomb!" << endl;
+            return true;
         }
+        return false;
     }
 
     //Kumarasiri
     void FlaggingTheField()
     {
-        if (board.flag == 0)
+        if (board.flags == 0)
         {
             cout << "You are out of Flags!" << endl;
         }
         else 
         {
             board.field[int(command[0])-65][int(command[1])-65][1] = 2;
-            board.flag--;
+            board.flags--;
         }
     }
 
-    //kawthuka
+    //Kawthuka
     bool areAllMinesFlagged() {
     for (int i = 0; i < board.rows; ++i) {
         for (int j = 0; j < board.rows; ++j) {
@@ -71,31 +73,64 @@ public:
         }
     }
     return true; // All mines are flagged
-}
+    }
 
     
-   //kawthuka
-    bool areAllTilesRevealed() {
-    for (int i = 0; i < board.rows; ++i) {
-        for (int j = 0; j < board.rows; ++j) {
-            // Check if this cell doesn't contain a bomb and it's not revealed
-            if (board[i][j][0] != 1 && board[i][j][1] != 1) {
-                return false; // Not all tiles are revealed except for bombs
+   //Kawthuka
+    bool areAllTilesRevealed() 
+    {
+        for (int i = 0; i < board.rows; ++i) 
+        {
+            for (int j = 0; j < board.rows; ++j)
+            {
+                // Check if this cell doesn't contain a bomb and it's not revealed
+                if (board.field[i][j][0] != 1 && board.field[i][j][1] != 1) 
+                {
+                    return false; // Not all tiles are revealed except for bombs
+                }
             }
+            return true;
         }
-        return true;
     }
-    
-    
+
+    //Kumarasiri
     void Game()
     {
+        GettingUserCommand();
+        
+        if (command[2] == 'R')
+        {
+            if (CheckIfItBombed())
+            {
+                board.display_field();
+                cout << "Game Over!" << endl;
+                return;
+            }
+            else
+            {
+                board.field[int(command[0])-65][int(command[1])-65][1] = 1;
+                board.display_field();
+            }
+        }
+        else if (command[2] == 'F')
+        {
+            FlaggingTheField();
+            board.display_field();
+        }
+
+        if (areAllMinesFlagged() || areAllTilesRevealed()) 
+        {
+            cout << "You won!" << endl;
+            return;
+        }
 
         Game();
     }
 
+    //Kumarasiri
     void WholeGame()
     {
         board.display_menu();
+        Game();
     }
-}
 };

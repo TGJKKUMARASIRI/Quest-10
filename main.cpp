@@ -6,6 +6,6 @@ using namespace std;
 int main()
 {
     Player player;
-    player.GettingUserCommand();
+    player.WholeGame();
     return 0;
 }
