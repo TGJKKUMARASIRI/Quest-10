@@ -12,7 +12,7 @@ class Player
 public:
     char command[3];
     Board board;
-
+    
     //Kumarasiri
     void GettingUserCommand()
     {
@@ -27,13 +27,13 @@ public:
 
         if (((int(command[0])) < 65 || (int(command[0])) > 64+board.rows) || ((int(command[1])) < 65 || (int(command[1])) > 64+board.rows))
         {
-            cout << "Invalid command. Please try again. Because of the wrong simple letters" << endl;
+            cout << "Invalid command. Please try again." << endl;
             GettingUserCommand();
         }
 
         if (command[2] != 'R' && command[2] != 'F')
         {
-            cout << "Invalid command. Please try again. Because of the F and R" << endl;
+            cout << "Invalid command. Please try again." << endl;
             GettingUserCommand();
         }
     }
