@@ -1,3 +1,5 @@
+//P.SIVABALASRI - 21/ENG/097
+//KAWTHUKA - 21/ENG/008
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -14,6 +16,7 @@ public:
     // Constructor
     Board() : rows(0), flags(0) {}
 
+    //P.SIVABALASRI
     // Function to display menu and set board dimensions
     void display_menu() {
         // Field options
@@ -48,6 +51,7 @@ public:
         initialize_bombs();
     }
 
+    //P.SIVABALASRI
     // Function to initialize bomb placement
     void initialize_bombs() {
         srand(static_cast<unsigned>(time(nullptr)));
@@ -65,6 +69,7 @@ public:
         }
     }
 
+    //Kawthuka
     // Function to count adjacent mines for a cell
     int countAdjacentMines(int row, int col, int mines[][2], char realBoard[][MAXSIDE]) {
         int count = 0;
@@ -94,23 +99,36 @@ public:
 
         return count;
     }
-
+    //Kawthuka
     // Function to check if a cell is valid
     bool isValid(int row, int col) {
         return (row >= 0) && (row < rows) &&
                (col >= 0) && (col < rows);
     }
 
+    //Kawthuka
     // Function to check if a cell has a mine
     bool isMine(int row, int col, char board[][MAXSIDE]) {
         return (board[row][col] == '*');
     }
 
+    //P.SIVABALASRI
     // Function to display the content of each cell
     void display_field() {
 //    	field[2][3][1] = 1;
 //        field[2][8][1] = 2;
+    
+    for (int i = 0; i < rows; ++i) {
+            cout << "  ";
+            for (int j = 0; j < rows; ++j) {
+                cout << char(j + 65) << " ";
+            }
+            cout << endl;
+            break;
+        }
+
         for (int i = 0; i < rows; ++i) {
+            cout << char(i + 65) << " ";
             for (int j = 0; j < rows; ++j) {
                 // Display the front layer (whether there is a bomb or not)
                 if (field[i][j][1] == 0) {
@@ -121,7 +139,14 @@ public:
                 } else {
                     // If it's not a bomb, use countAdjacentMines to get the number of adjacent bombs
                     int adjacentMines = countAdjacentMines(i, j, nullptr, getRealBoard());
-                    cout << adjacentMines << " ";
+                    if (adjacentMines == 0)
+                    {
+                        cout << ". ";
+                    }
+                    else
+                    {
+                        cout << adjacentMines << " ";
+                    }
                 }
             }
             cout << endl;
@@ -130,6 +155,7 @@ public:
         cout << endl;
     }
 
+    //Kawthuka
     // Function to get the real board (mine locations)
     char (*getRealBoard())[MAXSIDE] {
         static char realBoard[MAXSIDE][MAXSIDE];

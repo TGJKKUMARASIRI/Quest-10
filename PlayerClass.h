@@ -14,7 +14,6 @@ public:
     //Kumarasiri
     void GettingUserCommand()
     {
-        board.rows = 10;
         cout << "Enter your command: ";
 
         for (int i = 0; i < 3; ++i) 
@@ -26,13 +25,13 @@ public:
 
         if (((int(command[0])) < 65 || (int(command[0])) > 64+board.rows) || ((int(command[1])) < 65 || (int(command[1])) > 64+board.rows))
         {
-            cout << "Invalid command. Please try again." << endl;
+            cout << "Invalid command. Please try again. Because of the wrong simple letters" << endl;
             GettingUserCommand();
         }
 
         if (command[2] != 'R' && command[2] != 'F')
         {
-            cout << "Invalid command. Please try again." << endl;
+            cout << "Invalid command. Please try again. Because of the F and R" << endl;
             GettingUserCommand();
         }
     }
@@ -89,8 +88,8 @@ public:
                     return false; // Not all tiles are revealed except for bombs
                 }
             }
-            return true;
         }
+        return true;
     }
 
     //Kumarasiri
@@ -102,7 +101,6 @@ public:
         {
             if (CheckIfItBombed())
             {
-                board.display_field();
                 cout << "Game Over!" << endl;
                 return;
             }
@@ -131,6 +129,9 @@ public:
     void WholeGame()
     {
         board.display_menu();
+        board.display_field();
+        cout << "Throughout the game, only use capital letters to give commands." << endl;
+        cout << "If you get error message for the command at the begining, please try again with the same command." << endl;
         Game();
     }
 };
