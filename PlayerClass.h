@@ -60,18 +60,33 @@ public:
         }
     }
 
-
-    void CheckIfWholeTheBombsAreFlagged()
-    {
-
+    //kawthuka
+    bool areAllMinesFlagged() {
+    for (int i = 0; i < board.rows; ++i) {
+        for (int j = 0; j < board.rows; ++j) {
+            // Check if this cell contains a mine and it's not flagged
+            if (board.field[i][j][0] == 1 && board.field[i][j][1] != 2) {
+                return false; // Mine is present but not flagged
+            }
+        }
     }
+    return true; // All mines are flagged
+}
 
     
-    void CheckIfFieldIsCleared()
-    {
-
+   //kawthuka
+    bool areAllTilesRevealed() {
+    for (int i = 0; i < board.rows; ++i) {
+        for (int j = 0; j < board.rows; ++j) {
+            // Check if this cell doesn't contain a bomb and it's not revealed
+            if (board[i][j][0] != 1 && board[i][j][1] != 1) {
+                return false; // Not all tiles are revealed except for bombs
+            }
+        }
+        return true;
     }
-
+    
+    
     void Game()
     {
 
@@ -82,4 +97,5 @@ public:
     {
         board.display_menu();
     }
+}
 };
