@@ -62,7 +62,7 @@ public:
         }
     }
 
-    //kawthuka
+    //Kawthuka
     bool areAllMinesFlagged() {
     for (int i = 0; i < board.rows; ++i) {
         for (int j = 0; j < board.rows; ++j) {
@@ -76,7 +76,7 @@ public:
     }
 
     
-   //kawthuka
+   //Kawthuka
     bool areAllTilesRevealed() 
     {
         for (int i = 0; i < board.rows; ++i) 
@@ -93,6 +93,7 @@ public:
         }
     }
 
+    //Kumarasiri
     void Game()
     {
         GettingUserCommand();
@@ -122,10 +123,11 @@ public:
             cout << "You won!" << endl;
             return;
         }
-        
+
         Game();
     }
 
+    //Kumarasiri
     void WholeGame()
     {
         board.display_menu();
